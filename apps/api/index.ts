@@ -41,13 +41,32 @@ app.get("/api/v1/website/status", authMiddleware, async (req, res) => {
 app.get("/api/v1/websites", authMiddleware, async (req, res) => {
     const userId = req.userId;
 
-   const data =  await prismaClient.website.findMany({
+   const websites =  await prismaClient.website.findMany({
         where: {
-            userId
+            userId,
+            disabled : false
         }
+    })
+    res.json({
+        websites
     })
 });
 
-app.delete("/api/v1/website", authMiddleware, (req, res) => {});
+app.delete("/api/v1/website", authMiddleware, async (req, res) => {
+    const websiteId = req.body.websiteId;
+    const userId = req.userId
+    await prismaClient.website.update({ 
+        where: {
+            id: websiteId,
+            userId
+        },
+        data:{
+            disabled: true
+        }
+    })
+    res.json({
+        message: "deleted website succesfully"
+    })
+});
 
 app.listen(3000);

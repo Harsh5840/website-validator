@@ -25,6 +25,7 @@ model Website {
   //know how to add clerk to foreign key concept
   userId String
   ticks  WebsiteTick[]
+  disabled   Boolean    @default(false)
 }
 
 
