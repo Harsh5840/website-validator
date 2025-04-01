@@ -27,6 +27,7 @@ model Website {
   ticks  WebsiteTick[]
 }
 
+
 model Validator {
   id        String        @id @default(uuid())
   publicKey String
@@ -44,7 +45,6 @@ model WebsiteTick {
   latency     Float
   website     Website       @relation(fields: [websiteId], references: [id])
   validator   Validator     @relation(fields: [validatorId], references: [id])
-
 }
 
 enum WebsiteStatus {
