@@ -5,13 +5,15 @@
   "private": true,
   "devDependencies": {
     "@types/bun": "latest",
-    "db" :"*"
+    "db": "*"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
     "@types/express": "^5.0.1",
-    "express": "^5.1.0"
+    "@types/jsonwebtoken": "^9.0.9",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
   }
 }

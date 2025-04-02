@@ -5,7 +5,7 @@ import { prismaClient } from "db/client";
 const app = express();
 app.use(express.json());
 
-app.post("/api/v1/website", authMiddleware, async (req, res) => {
+app.post("/api/v1/website", authMiddleware , async (req, res) => {
   const userId = req.userId!; //if you are sure that something surely exists then use !
   const url = req.body; //whenever we use req.body we have to use app.use(express.json())
   const data = await prismaClient.website.create({
@@ -45,6 +45,9 @@ app.get("/api/v1/websites", authMiddleware, async (req, res) => {
         where: {
             userId,
             disabled : false
+        },
+        include: {
+            ticks: true
         }
     })
     res.json({
